@@ -2,9 +2,7 @@ import axios from "axios";
 
 const contactsInstance = axios.create({
     baseURL: 'https://connections-api.herokuapp.com',
-    headers: {
-        Authorization: "Bearer ..."
-    }
+  
 });
 
 export const setToken = (token) => {

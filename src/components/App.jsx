@@ -1,7 +1,9 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import css from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
+import { useDispatch } from 'react-redux';
+import { refreshThunk } from 'redux/authReducer';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
@@ -16,6 +18,11 @@ const appRouts = [
 ];
 
 export const App = () => {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(refreshThunk())
+  }, [dispatch]);
   return (
     <div className={css.container}>
       <Navigation/>

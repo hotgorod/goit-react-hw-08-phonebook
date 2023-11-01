@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { requestLogin, requestRegister } from 'services/contactsApi';
+import { requestLogin, requestRefreshUser, requestRegister, setToken } from 'services/contactsApi';
 
 export const loginThunk = createAsyncThunk(
   'auth/login',
@@ -27,6 +27,29 @@ export const registerThunk = createAsyncThunk(
   }
 );
 
+export const refreshThunk = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
+    try {
+      setToken(token);
+      const authData = await requestRefreshUser();
+      console.log("authData:", authData);
+      return authData;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }, {
+    condition: (_, thunkAPI) => {
+        const state = thunkAPI.getState();
+      const token = state.auth.token;
+      if (!token) return false;
+      return true;
+    }
+  }
+);
+
 const INITIAL_STATE = {
   token: null,
   user: {
@@ -41,9 +64,7 @@ const INITIAL_STATE = {
 const authSlice = createSlice({
   name: 'auth',
   initialState: INITIAL_STATE,
-  reducers: {
-    
-  },
+  reducers: {},
   extraReducers: builder =>
     builder
       .addCase(registerThunk.pending, state => {
@@ -71,6 +92,19 @@ const authSlice = createSlice({
         state.user = action.payload.user;
       })
       .addCase(loginThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(refreshThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(refreshThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSignedIn = true;
+                state.user = action.payload;
+      })
+      .addCase(refreshThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       }),
