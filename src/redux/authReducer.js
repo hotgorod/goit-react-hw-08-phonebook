@@ -33,7 +33,7 @@ const INITIAL_STATE = {
     email: null,
     name: null,
   },
-  isSingedIn: false,
+  isSignedIn: false,
   isLoading: false,
   error: null,
 };
@@ -42,9 +42,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: INITIAL_STATE,
   reducers: {
-    setFilter: (state, action) => {
-      state.filter = action.payload;
-    },
+    
   },
   extraReducers: builder =>
     builder
@@ -54,7 +52,7 @@ const authSlice = createSlice({
       })
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSingedIn = true;
+        state.isSignedIn = true;
         state.token = action.payload.token;
         state.user = action.payload.user;
       })
@@ -68,7 +66,7 @@ const authSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSingedIn = true;
+        state.isSignedIn = true;
         state.token = action.payload.token;
         state.user = action.payload.user;
       })
