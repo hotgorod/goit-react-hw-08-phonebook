@@ -1,9 +1,9 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import css from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
 import { useDispatch } from 'react-redux';
 import { refreshThunk } from 'redux/authReducer';
+import { Container } from '@chakra-ui/react';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
@@ -24,8 +24,8 @@ export const App = () => {
     dispatch(refreshThunk())
   }, [dispatch]);
   return (
-    <div className={css.container}>
-      <Navigation/>
+    <Container maxW="670px">
+      <Navigation />
       <Suspense fallback="Loading...">
         <Routes>
           {appRouts.map(({ path, element }) => (
@@ -33,6 +33,6 @@ export const App = () => {
           ))}
         </Routes>
       </Suspense>
-    </div>
+    </Container>
   );
 };

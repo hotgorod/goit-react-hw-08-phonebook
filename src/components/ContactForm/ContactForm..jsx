@@ -3,6 +3,8 @@ import React from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch} from 'react-redux';
 import { addContact } from 'redux/contactSlice';
+import { Box, Button, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
+
 
 export const ContactForm = () => {
  const dispatch = useDispatch();
@@ -24,22 +26,33 @@ export const ContactForm = () => {
   };
 
   return (
-    <>
-      <h1>Phonebook</h1>
-      <form onSubmit={handleAddContact} className={css.contactForm}>
-        <label>
-          Name
-          <input className={css.inputText} type="text" name="name" required />
-        </label>
-        <label>
-          Number
-          <input className={css.inputText} type="tel" name="number" required />
-        </label>
-        <button type="submit" className={css.formButton}>
+    <Box maxW="100%" m='auto' mb='24px'>
+      <Heading size="lg" m="auto">
+        Phonebook
+      </Heading>
+      <form onSubmit={handleAddContact}>
+        <FormControl>
+           <FormLabel>
+            Name
+            <Input type="text" name="name" required />
+          </FormLabel>
+        </FormControl>
+        <FormControl>
+          <FormLabel>
+            Number
+            <Input
+              
+              type="tel"
+              name="number"
+              required
+            />
+          </FormLabel>
+        </FormControl>
+        <Button type="submit" colorScheme="orange">
           Add contact
-        </button>
+        </Button>
       </form>
-    </>
+    </Box>
   );
 };
 

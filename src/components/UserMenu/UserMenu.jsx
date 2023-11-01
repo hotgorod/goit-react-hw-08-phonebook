@@ -1,3 +1,4 @@
+import { Button, HStack } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectAuthUserData } from 'redux/auth.selectors';
@@ -6,10 +7,10 @@ const UserMenu = () => {
     const userState = useSelector(selectAuthUserData)
    
   return (
-    <div>
+    <HStack spacing='24px'>
       <p>{userState.email}</p>
-      <button>Logout</button>
-    </div>
+      <Button colorScheme='orange'>Logout</Button>
+    </HStack>
   );
 }
 

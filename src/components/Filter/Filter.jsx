@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
 import { selectItemsFilter } from 'redux/contacts.selectors';
 import { setFilter } from 'redux/contactSlice';
+import { Box, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
 
 
 
@@ -15,18 +16,17 @@ const Filter = () => {
     dispatch(setFilter(value));
   };
   return (
-    <>
-      <h2>Contacts</h2>
-      <label>
-        Find contacts by name
-        <input
-          className={css.inputText}
-          type="text"
-          value={filter}
-          onChange={handleFilter}
-        ></input>
-      </label>
-    </>
+    <Box maxW="100%" m="auto">
+      <Heading size="lg">Contacts</Heading>
+      <form>
+        <FormControl>
+          <FormLabel>
+            Find contacts by name
+            <Input type="text" value={filter} onChange={handleFilter}></Input>
+          </FormLabel>
+        </FormControl>
+      </form>
+    </Box>
   );
 };
 
