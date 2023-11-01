@@ -1,3 +1,4 @@
+import UserMenu from 'components/UserMenu/UserMenu';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -13,7 +14,7 @@ const Navigation = () => {
       {isSignedIn ? (
         <>
           <NavLink to="/contacts">Contacts</NavLink>
-          <button>Log Out</button>
+          <UserMenu/>
         </>
       ) : (
         <>
