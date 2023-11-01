@@ -1,22 +1,30 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { registerThunk } from 'redux/authReducer';
 
 const RegisterPage = () => {
   const {
     register,
     handleSubmit,
-
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => console.log(data);
+  const dispatch = useDispatch();
+
+  const onSubmit = data => {
+    console.log(data);
+    dispatch(registerThunk(data));
+    reset();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>
         <span>Email:</span>
         <input
-          defaultValue="test"
+          defaultValue=""
           {...register('email', { required: true })}
           type="email"
         />
@@ -25,7 +33,7 @@ const RegisterPage = () => {
       <label>
         <span>Name:</span>
         <input
-          defaultValue="test"
+          defaultValue=""
           {...register('name', { required: true })}
           type="text"
         />
@@ -34,14 +42,14 @@ const RegisterPage = () => {
       <label>
         <span>Password:</span>
         <input
-          defaultValue="test"
+          defaultValue=""
           {...register('password', { required: true, minLength: 7 })}
           type="password"
         />
-        {errors.password && <span>This field is required</span>}
+        {errors.password && <span>This field is requared</span>}
       </label>
 
-      <button type='submit'>Sing Up</button>
+      <button type="submit">Sing Up</button>
     </form>
   );
 };

@@ -1,15 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { requestLogin, requestRegister } from 'services/ContactsApi';
-
+import { requestLogin, requestRegister } from 'services/contactsApi';
 
 export const loginThunk = createAsyncThunk(
   'auth/login',
   async (formData, thunkAPI) => {
     try {
-        const response = await requestLogin(formData);
-        console.log(response);
-        return response;
-        
+      const response = await requestLogin(formData);
+      console.log(response);
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -20,9 +18,9 @@ export const registerThunk = createAsyncThunk(
   'auth/register',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestRegister(formData);
-      console.log(response);
-      return response;
+      const authData = await requestRegister(formData);
+
+      return authData;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -30,16 +28,18 @@ export const registerThunk = createAsyncThunk(
 );
 
 const INITIAL_STATE = {
-  contacts: {
-    
-    isLoading: false,
-    error: null,
+  token: null,
+  user: {
+    email: null,
+    name: null,
   },
-  filter: '',
+  isSingedIn: false,
+  isLoading: false,
+  error: null,
 };
 
-const contactSlice = createSlice({
-  name: 'contacts',
+const authSlice = createSlice({
+  name: 'auth',
   initialState: INITIAL_STATE,
   reducers: {
     setFilter: (state, action) => {
@@ -48,47 +48,34 @@ const contactSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-    //   .addCase(fetchContacts.pending, state => {
-    //     state.contacts.isLoading = true;
-    //     state.contacts.error = null;
-    //   })
-    //   .addCase(fetchContacts.fulfilled, (state, action) => {
-    //     state.contacts.isLoading = false;
-    //     state.contacts.items = action.payload;
-    //   })
-    //   .addCase(fetchContacts.rejected, (state, action) => {
-    //     state.contacts.isLoading = false;
-    //     state.contacts.error = action.payload;
-    //   })
-
-    //   .addCase(addContact.pending, state => {
-    //     state.contacts.isLoading = true;
-    //     state.contacts.error = null;
-    //   })
-    //   .addCase(addContact.fulfilled, (state, action) => {
-    //     state.contacts.isLoading = false;
-    //     state.contacts.items.unshift(action.payload);
-    //   })
-    //   .addCase(addContact.rejected, (state, action) => {
-    //     state.contacts.isLoading = false;
-    //     state.contacts.error = action.payload;
-    //   })
-
-    //   .addCase(deleteContact.pending, state => {
-    //     state.contacts.isLoading = true;
-    //     state.contacts.error = null;
-    //   })
-    //   .addCase(deleteContact.fulfilled, (state, action) => {
-    //     state.contacts.isLoading = false;
-    //     state.contacts.items = state.contacts.items.filter(
-    //       item => item.id !== action.payload.id
-    //     );
-    //   })
-    //   .addCase(deleteContact.rejected, (state, action) => {
-    //     state.contacts.isLoading = false;
-    //     state.contacts.error = action.payload;
-    //   }),
+      .addCase(registerThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(registerThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSingedIn = true;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+      })
+      .addCase(registerThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(loginThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(loginThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSingedIn = true;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+      })
+      .addCase(loginThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      }),
 });
 
-export const { setFilter } = contactSlice.actions;
-export const contactReducer = contactSlice.reducer;
+export const authReducer = authSlice.reducer;
