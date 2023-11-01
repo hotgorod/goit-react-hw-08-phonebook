@@ -32,9 +32,8 @@ export const App = () => {
              path="/"
              element={
                <>
-                 <h1>Phonebook</h1>
+                 
                  <ContactForm addContactCallback={addContactToPhonebook} />
-                 <h2>Contacts</h2>
                  
                  <Filter />
                  <ContactList />

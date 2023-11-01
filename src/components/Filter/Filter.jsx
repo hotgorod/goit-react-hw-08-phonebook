@@ -15,15 +15,18 @@ const Filter = () => {
     dispatch(setFilter(value));
   };
   return (
-    <label>
-      Find contacts by name
-      <input
-        className={css.inputText}
-        type="text"
-        value={filter}
-        onChange={handleFilter}
-      ></input>
-    </label>
+    <>
+      <h2>Contacts</h2>
+      <label>
+        Find contacts by name
+        <input
+          className={css.inputText}
+          type="text"
+          value={filter}
+          onChange={handleFilter}
+        ></input>
+      </label>
+    </>
   );
 };
 

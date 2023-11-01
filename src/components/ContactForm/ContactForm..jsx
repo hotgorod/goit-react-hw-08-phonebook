@@ -24,29 +24,22 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleAddContact} className={css.contactForm}>
-      <label>
-        Name
-        <input
-          className={css.inputText}
-          type="text"
-          name="name"
-         required
-        />
-      </label>
-      <label>
-        Number
-        <input
-          className={css.inputText}
-          type="tel"
-          name="number"
-                 required
-        />
-      </label>
-      <button type="submit" className={css.formButton}>
-        Add contact
-      </button>
-    </form>
+    <>
+      <h1>Phonebook</h1>
+      <form onSubmit={handleAddContact} className={css.contactForm}>
+        <label>
+          Name
+          <input className={css.inputText} type="text" name="name" required />
+        </label>
+        <label>
+          Number
+          <input className={css.inputText} type="tel" name="number" required />
+        </label>
+        <button type="submit" className={css.formButton}>
+          Add contact
+        </button>
+      </form>
+    </>
   );
 };
 
