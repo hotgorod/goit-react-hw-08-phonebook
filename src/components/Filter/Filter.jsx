@@ -18,11 +18,12 @@ const Filter = () => {
   return (
     <Box
       rounded={'lg'}
-      bg='darkgrey'
-      boxShadow={'lg'}
+      bg='grey'
+      
       p={8}
+      color='white'
     >
-      <Heading size="lg">Find Contact</Heading>
+      <Heading size="lg" mb='1'>Find Contact</Heading>
       <form>
         <FormControl>
           <FormLabel>
