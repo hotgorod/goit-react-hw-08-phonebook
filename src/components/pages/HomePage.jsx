@@ -31,7 +31,7 @@ const HomePage = () => {
           </Heading>
           <Text color={'gray.500'}>
             Welcome to the Phone Book Application. You can easily manage your
-            contacts here. You can easily add, delete and find contacts
+            contacts here. You can add, delete and find contacts
           </Text>
           <Stack
             direction={'column'}

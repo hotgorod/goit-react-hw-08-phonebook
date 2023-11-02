@@ -2,11 +2,12 @@ import { Box, Flex, Link as ChakraLink} from '@chakra-ui/react';
 import UserMenu from 'components/UserMenu/UserMenu';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { selectAuthIsSignedIn } from 'redux/auth.selectors';
 
 const Navigation = () => {
   const isSignedIn = useSelector(selectAuthIsSignedIn);
+  const { pathname } = useLocation();
 
   return (
     <Box
@@ -22,13 +23,17 @@ const Navigation = () => {
         <ChakraLink
           to="/"
           as={Link}
-          _active={{ color: 'red' }}
           _hover={{
             textDecoration: 'none',
             bg: 'orange',
             color: 'black',
             rounded: '10px',
           }}
+          fontWeight="bold"
+          // bg={pathname === '/' ? 'orange' : 'transparent'}
+          // color={pathname === '/' ? 'white' : 'gray.400'}
+          color={pathname === '/' ? 'orange' : 'white'}
+          // rounded={pathname === '/' ? '10px' : '10px'}
         >
           Home
         </ChakraLink>
@@ -45,6 +50,9 @@ const Navigation = () => {
                 color: 'black',
                 rounded: '10px',
               }}
+              fontWeight="bold"
+              // bg={pathname === '/contacts' ? 'orange' : 'transparent'}
+              color={pathname === '/contacts' ? 'orange' : 'white'}
             >
               Contacts
             </ChakraLink>
