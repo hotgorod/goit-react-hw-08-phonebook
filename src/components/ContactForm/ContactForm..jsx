@@ -3,7 +3,7 @@ import React from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch} from 'react-redux';
 import { addContact } from 'redux/contactSlice';
-import { Box, Button, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Heading, Input, useColorModeValue } from '@chakra-ui/react';
 
 
 export const ContactForm = () => {
@@ -26,13 +26,20 @@ export const ContactForm = () => {
   };
 
   return (
-    <Box maxW="100%" m='auto' mb='24px'>
+    <Box
+      rounded={'lg'}
+      bg={useColorModeValue('white', 'gray.700')}
+      boxShadow={'lg'}
+      p={8}
+      mb='24px'
+    >
+      
       <Heading size="lg" m="auto">
-        Phonebook
+        Add contacts to your Phonebook
       </Heading>
       <form onSubmit={handleAddContact}>
         <FormControl>
-           <FormLabel>
+          <FormLabel>
             Name
             <Input type="text" name="name" required />
           </FormLabel>
@@ -40,12 +47,7 @@ export const ContactForm = () => {
         <FormControl>
           <FormLabel>
             Number
-            <Input
-              
-              type="tel"
-              name="number"
-              required
-            />
+            <Input type="tel" name="number" required />
           </FormLabel>
         </FormControl>
         <Button type="submit" colorScheme="orange">

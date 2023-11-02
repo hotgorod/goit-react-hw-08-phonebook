@@ -9,6 +9,8 @@ import {
   selectItemsFilter,
   selectItemsIsloading,
 } from 'redux/contacts.selectors';
+import { IconButton } from '@chakra-ui/react';
+import { HiX } from 'react-icons/hi';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -51,13 +53,18 @@ const ContactList = () => {
                 <p className={css.contactListItemText}>
                   {item.name}: {item.phone}
                 </p>
-                <button
-                  className={css.deleteButton}
+                <IconButton
+                  isRound={true}
+                  // variant="solid"
+                  // colorScheme="red"
+                  aria-label="Delete"
+                  fontSize="20px"
+                  icon={<HiX />}
                   type="button"
                   onClick={() => handleDeleteContact(item.id)}
                 >
                   Delete
-                </button>
+                </IconButton>
               </li>
             );
           })}

@@ -1,49 +1,61 @@
+import { Box, Button, FormControl, FormLabel, Heading, Input, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/authReducer';
 
 const LoginPage = () => {
-   const {
-     register,
-     handleSubmit,
-     reset,
-     formState: { errors },
-   } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-   const onSubmit = data => {
-     console.log(data);
-     dispatch(loginThunk(data));
-     reset();
-   };
+  const onSubmit = data => {
+    console.log(data);
+    dispatch(loginThunk(data));
+    reset();
+  };
 
-   return (
-     <form onSubmit={handleSubmit(onSubmit)}>
-       <label>
-         <span>Email:</span>
-         <input
-           defaultValue=""
-           {...register('email', { required: true })}
-           type="email"
-         />
-         {errors.email && <span>This field is required</span>}
-       </label>
-       
-       <label>
-         <span>Password:</span>
-         <input
-           defaultValue=""
-           {...register('password', { required: true, minLength: 7 })}
-           type="password"
-         />
-         {errors.password && <span>This field is requared</span>}
-       </label>
+  return (
+    <Box
+      rounded={'lg'}
+      bg={useColorModeValue('white', 'gray.700')}
+      boxShadow={'lg'}
+      p={8}
+    >
+      <Heading fontSize="2xl">Sign in to your account</Heading>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl>
+          <FormLabel>
+            Email:
+            <Input
+              defaultValue=""
+              {...register('email', { required: true })}
+              type="email"
+            />
+            {errors.email && <span>This field is required</span>}
+          </FormLabel>
+        </FormControl>
+        <FormLabel>
+          Password:
+          <Input
+            defaultValue=""
+            {...register('password', { required: true, minLength: 7 })}
+            type="password"
+          />
+          {errors.password && <span>This field is requared</span>}
+        </FormLabel>
 
-       <button type="submit">Sing In</button>
-     </form>
-   );
-}
+        <Button type="submit" colorScheme="orange">
+          Sing In
+        </Button>
+      </form>
+    </Box>
+  );
+};
 
 export default LoginPage;
