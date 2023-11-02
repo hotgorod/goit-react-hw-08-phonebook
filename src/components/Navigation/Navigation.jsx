@@ -1,4 +1,4 @@
-import { Box, Flex, Link as ChakraLink, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Link as ChakraLink} from '@chakra-ui/react';
 import UserMenu from 'components/UserMenu/UserMenu';
 import React from 'react';
 import { useSelector } from 'react-redux';

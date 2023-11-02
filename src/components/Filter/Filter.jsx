@@ -1,9 +1,9 @@
-import css from './Filter.module.css';
+
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
 import { selectItemsFilter } from 'redux/contacts.selectors';
 import { setFilter } from 'redux/contactSlice';
-import { Box, FormControl, FormLabel, Heading, Input, useColorModeValue } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Heading, Input} from '@chakra-ui/react';
 
 
 

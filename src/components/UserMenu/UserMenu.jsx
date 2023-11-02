@@ -9,17 +9,13 @@ const UserMenu = () => {
   return (
     <>
       <HStack spacing="24px">
-        <Tag size="lg" colorScheme="orange" borderRadius="full">
-          <Avatar
-            src="https://bit.ly/sage-adebayo"
-            size="xs"
-           
-            ml={-1}
-            mr={2}
-          />
+        <Tag size="lg" colorScheme="orange">
+          <Avatar src="https://bit.ly/sage-adebayo" size="xs" ml={-1} mr={2} />
           <TagLabel>{userState.email}</TagLabel>
         </Tag>
-        <Button colorScheme="orange">Logout</Button>
+        <Button colorScheme="orange" size="sm">
+          Logout
+        </Button>
       </HStack>
     </>
   );
