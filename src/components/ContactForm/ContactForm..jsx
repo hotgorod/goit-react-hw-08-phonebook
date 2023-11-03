@@ -14,12 +14,12 @@ export const ContactForm = () => {
     event.preventDefault();
 
     const name = event.currentTarget.elements.name.value;
-    const phone = event.currentTarget.elements.number.value;
+    const number = event.currentTarget.elements.number.value;
 
     const newContact = {
       name,
-      phone,
-    }
+      number,
+    };
     dispatch(addContact(newContact));
     
     event.currentTarget.reset();

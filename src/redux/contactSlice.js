@@ -3,7 +3,7 @@ import {
   requestAddContact,
   requestContacts,
   requestDeleteContact,
-} from 'services/api';
+} from 'services/contactsApi';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -81,7 +81,12 @@ const contactSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.contacts.isLoading = false;
-        state.contacts.items.unshift(action.payload);
+        if (Array.isArray(state.contacts)) {
+          state.contacts.items.unshift(action.payload);
+          
+        } else {
+          state.contacts.items = [action.payload];
+        }
       })
       .addCase(addContact.rejected, (state, action) => {
         state.contacts.isLoading = false;

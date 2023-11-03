@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { selectAuthIsSignedIn } from 'redux/auth.selectors';
 
+
 const Navigation = () => {
   const isSignedIn = useSelector(selectAuthIsSignedIn);
   const { pathname } = useLocation();
@@ -27,7 +28,7 @@ const Navigation = () => {
             textDecoration: 'none',
             bg: 'orange',
             color: 'black',
-            rounded: '10px',
+            rounded: '4px',
           }}
           fontWeight="bold"
           // bg={pathname === '/' ? 'orange' : 'transparent'}
@@ -48,7 +49,7 @@ const Navigation = () => {
                 textDecoration: 'none',
                 bg: 'orange',
                 color: 'black',
-                rounded: '10px',
+                rounded: '4px',
               }}
               fontWeight="bold"
               // bg={pathname === '/contacts' ? 'orange' : 'transparent'}

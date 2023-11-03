@@ -4,6 +4,8 @@ import Navigation from './Navigation/Navigation';
 import { useDispatch } from 'react-redux';
 import { refreshThunk } from 'redux/authReducer';
 import { Container } from '@chakra-ui/react';
+import RestrictedRoute from './RestrictedRoute';
+import PrivatedRoute from './PrivateRoute';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
@@ -12,9 +14,30 @@ const ContactsPage = lazy(() => import('./pages/ContactsPage'));
 
 const appRouts = [
   { path: '/', element: <HomePage /> },
-  { path: '/register', element: <RegisterPage /> },
-  { path: '/login', element: <LoginPage /> },
-  { path: '/contacts', element: <ContactsPage /> },
+  {
+    path: '/register',
+    element: (
+      <RestrictedRoute redirectTo="/contacts">
+        <RegisterPage />
+      </RestrictedRoute>
+    ),
+  },
+  {
+    path: '/login',
+    element: (
+      <RestrictedRoute redirectTo="/contacts">
+        <LoginPage />
+      </RestrictedRoute>
+    ),
+  },
+  {
+    path: '/contacts',
+    element: (
+      <PrivatedRoute redirectTo='/login'>
+        <ContactsPage />
+      </PrivatedRoute>
+    ),
+  },
 ];
 
 export const App = () => {

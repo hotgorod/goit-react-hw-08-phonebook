@@ -47,7 +47,7 @@ const HomePage = () => {
               Get Started
             </Button>
             <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-              Learn more
+              Log In if you already have account
             </Button>
           </Stack>
         </Stack>
