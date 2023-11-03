@@ -1,15 +1,13 @@
-import {
-  Box,
-  Heading,
-  Container,
-  Text,
-  Button,
-  Stack,
-
-} from '@chakra-ui/react';
+import { Link as ChakraLink } from '@chakra-ui/react';
+import { Box, Heading, Container, Text, Button, Stack } from '@chakra-ui/react';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { selectAuthIsSignedIn } from 'redux/auth.selectors';
 
 const HomePage = () => {
+  const { pathname } = useLocation();
+  const isSignedIn = useSelector(selectAuthIsSignedIn);
   return (
     <>
       <Container maxW={'3xl'}>
@@ -40,20 +38,94 @@ const HomePage = () => {
             alignSelf={'center'}
             position={'relative'}
           >
-            <Button
-              colorScheme={'orange'}
-             
-            >
-              Get Started
-            </Button>
-            <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-              Log In if you already have account
-            </Button>
+            {!isSignedIn ? (
+              <>
+                <Button as={Link} to='/register' colorScheme={'orange'}>Get Started</Button>
+                <ChakraLink
+                  to="/login"
+                  as={Link}
+                  _hover={{
+                    color: 'orange',
+                  }}
+                  fontWeight="bold"
+                  color={pathname === '/login' ? 'orange' : 'black'}
+                >
+                  Login if you already has an account
+                </ChakraLink>
+              </>
+            ) : (
+              <></>
+            )}
           </Stack>
         </Stack>
       </Container>
     </>
   );
-}
+};
 
 export default HomePage;
+
+// <ChakraLink
+//       to="/"
+//       as={Link}
+//       _hover={{
+//         textDecoration: 'none',
+//         bg: 'orange',
+//         color: 'black',
+//         rounded: '4px',
+//       }}
+//       fontWeight="bold"
+//       color={pathname === '/' ? 'orange' : 'white'}
+//     >
+//       Home
+//     </ChakraLink>
+
+//     {isSignedIn ? (
+//       <>
+//         <ChakraLink
+//           to="/contacts"
+//           as={Link}
+//           _active={{ color: 'red' }}
+//           _hover={{
+//             textDecoration: 'none',
+//             bg: 'orange',
+//             color: 'black',
+//             rounded: '4px',
+//           }}
+//           fontWeight="bold"
+//           color={pathname === '/contacts' ? 'orange' : 'white'}
+//         >
+//           Contacts
+//         </ChakraLink>
+//         <UserMenu />
+//       </>
+//     ) : (
+//       <>
+//         <ChakraLink
+//           to="/register"
+//           as={Link}
+//           _hover={{
+//             textDecoration: 'none',
+//             bg: 'orange',
+//             color: 'black',
+//             rounded: '4px',
+//           }}
+//           fontWeight="bold"
+//           color={pathname === '/register' ? 'orange' : 'white'}
+//         >
+//           Register
+//         </ChakraLink>
+//         <ChakraLink
+//           to="/login"
+//           as={Link}
+//           _hover={{
+//             textDecoration: 'none',
+//             bg: 'orange',
+//             color: 'black',
+//             rounded: '4px',
+//           }}
+//           fontWeight="bold"
+//           color={pathname === '/login' ? 'orange' : 'white'}
+//         >
+//           Login
+//         </ChakraLink>

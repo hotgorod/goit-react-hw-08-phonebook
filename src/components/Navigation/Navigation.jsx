@@ -1,10 +1,9 @@
-import { Box, Flex, Link as ChakraLink} from '@chakra-ui/react';
+import { Box, Flex, Link as ChakraLink } from '@chakra-ui/react';
 import UserMenu from 'components/UserMenu/UserMenu';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { selectAuthIsSignedIn } from 'redux/auth.selectors';
-
 
 const Navigation = () => {
   const isSignedIn = useSelector(selectAuthIsSignedIn);
@@ -31,10 +30,7 @@ const Navigation = () => {
             rounded: '4px',
           }}
           fontWeight="bold"
-          // bg={pathname === '/' ? 'orange' : 'transparent'}
-          // color={pathname === '/' ? 'white' : 'gray.400'}
           color={pathname === '/' ? 'orange' : 'white'}
-          // rounded={pathname === '/' ? '10px' : '10px'}
         >
           Home
         </ChakraLink>
@@ -52,7 +48,6 @@ const Navigation = () => {
                 rounded: '4px',
               }}
               fontWeight="bold"
-              // bg={pathname === '/contacts' ? 'orange' : 'transparent'}
               color={pathname === '/contacts' ? 'orange' : 'white'}
             >
               Contacts
@@ -61,8 +56,34 @@ const Navigation = () => {
           </>
         ) : (
           <>
-            <NavLink to="/register">Register</NavLink>
-            <NavLink to="/login">Login</NavLink>
+            <ChakraLink
+              to="/register"
+              as={Link}
+              _hover={{
+                textDecoration: 'none',
+                bg: 'orange',
+                color: 'black',
+                rounded: '4px',
+              }}
+              fontWeight="bold"
+              color={pathname === '/register' ? 'orange' : 'white'}
+            >
+              Register
+            </ChakraLink>
+            <ChakraLink
+              to="/login"
+              as={Link}
+              _hover={{
+                textDecoration: 'none',
+                bg: 'orange',
+                color: 'black',
+                rounded: '4px',
+              }}
+              fontWeight="bold"
+              color={pathname === '/login' ? 'orange' : 'white'}
+            >
+              Login
+            </ChakraLink>
           </>
         )}
       </Flex>

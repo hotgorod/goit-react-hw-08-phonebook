@@ -51,7 +51,7 @@ const ContactList = () => {
             return (
               <li className={css.contactListItem} key={item.id}>
                 <p className={css.contactListItemText}>
-                  {item.name}: {item.phone}
+                  {item.name}: {item.number}
                 </p>
                 <IconButton
                   isRound={true}

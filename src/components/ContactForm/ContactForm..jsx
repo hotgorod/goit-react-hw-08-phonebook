@@ -1,6 +1,4 @@
 
-import React from 'react';
-
 import { useDispatch} from 'react-redux';
 import { addContact } from 'redux/contactSlice';
 import { Box, Button, FormControl, FormLabel, Heading, Input, useColorModeValue } from '@chakra-ui/react';
