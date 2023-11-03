@@ -50,7 +50,7 @@ const HomePage = () => {
                   fontWeight="bold"
                   color={pathname === '/login' ? 'orange' : 'black'}
                 >
-                  Login if you already has an account
+                  Login if you already have an account
                 </ChakraLink>
               </>
             ) : (
