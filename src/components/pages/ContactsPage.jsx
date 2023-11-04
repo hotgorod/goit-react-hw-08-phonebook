@@ -4,9 +4,11 @@ import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectItems } from 'redux/contacts.selectors';
 
 const ContactsPage = () => {
-    const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
+  const isContactItemExist = useSelector(selectItems);
 
     const addContactToPhonebook = (contactName, contactNumber) => {
       const isDuplicate = contacts.some(
@@ -21,7 +23,8 @@ const ContactsPage = () => {
   return (
     <div>
       <ContactForm addContactCallback={addContactToPhonebook} />
-      <Filter />
+      {(isContactItemExist.length > 0)  && <Filter />}
+
       <ContactList />
     </div>
   );
