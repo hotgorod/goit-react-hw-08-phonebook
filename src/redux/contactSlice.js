@@ -81,7 +81,7 @@ const contactSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.contacts.isLoading = false;
-        if (Array.isArray(state.contacts)) {
+        if (Array.isArray(state.contacts.items)) {
           state.contacts.items.unshift(action.payload);
           
         } else {
