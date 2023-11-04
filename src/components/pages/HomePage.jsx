@@ -20,7 +20,8 @@ const HomePage = () => {
                       <Heading
               fontWeight={600}
               fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-              lineHeight={'110%'}
+            lineHeight={'110%'}
+            animation="scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both"
             >
               Create your own <br />
               <Text as={'span'} color={'orange'}>
