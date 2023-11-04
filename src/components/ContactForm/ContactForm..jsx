@@ -9,7 +9,7 @@ export const ContactForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
  const dispatch = useDispatch();
 
